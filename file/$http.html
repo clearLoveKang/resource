@@ -1,0 +1,162 @@
+<script src="/hardware-sys/public/plu/jquery/jquery-1.6.4/jquery.min.js" type="text/javascript"></script>
+<script src="/hardware-sys/public/js/JsUtils.js" type="text/javascript"></script>
+<script>
+window.cityObj = new UniqIndexedList('city_id');
+window.districtObj = new UniqIndexedList('dis_id');
+window.provinceObj = new UniqIndexedList('pro_id');
+(function(){
+$.ajaxSettings.async = false; 
+$.getJSON("/hardware-sys/public/json/city.json",function(result){
+	$.each(result.data, function (i, o) {
+	  cityObj.add({
+	    "city_id": o.city_id,
+	    "pro_id":o.pro_id,
+	    "name": o.name
+	  });
+	});
+});
+$.ajaxSettings.async = false; 
+$.getJSON("/hardware-sys/public/json/district.json",function(result){
+	$.each(result.data, function (i, o) {
+	  districtObj.add({
+	    "dis_id": o.dis_id,
+	    "city_id":o.city_id,
+	    "name": o.name
+	  });
+	});
+});
+$.ajaxSettings.async = false; 
+$.getJSON("/hardware-sys/public/json/province.json",function(result){
+	$.each(result.data, function (i, o) {
+	  provinceObj.add({
+	    "pro_id": o.pro_id,
+	    "name": o.name
+	  });
+	});
+});
+
+})();
+</script>
+{  
+		"code":"0",
+  	"res":{  "msg":"操作成功",
+      "data":[
+            {
+              "id":"402882465b42c3ef015b42c4cb470001",
+              "districtNo":"RQ2017040600007",
+              "districtName":"盈家生活xxeee",
+              "houseStreet":{
+              	"provinceId":"<script>var p = provinceObj.get(9);document.write(p.name || "");</script>",
+              	"cityId":"<script>var p = cityObj.get(3);document.write(p.name || "");</script>",
+              	"dist":"<script>var p = districtObj.get(49);document.write(p.name || "");</script>",,
+              	"street":"中山北路01号w"
+              },
+              "houses":[
+              	{
+              		"floorNo":"1",
+              		"unit":"1",
+              		"roomNo":"1071",
+              		"door":""
+              	}
+              		
+              ]
+            }
+            ,
+            {
+              "id":"402882465b1f471f015b1f606f890001",
+              "districtNo":"RQ2017033000005",
+              "districtName":"盈家生活01",
+              "houseStreet":{
+              	"provinceId":"<script>var p = provinceObj.get(9);document.write(p.name || "");</script>",
+              	"cityId":"<script>var p = cityObj.get(3);document.write(p.name || "");</script>",
+              	"dist":"<script>var p = districtObj.get(49);document.write(p.name || "");</script>",,
+              	"street":"中山北路01号"
+              },
+              "houses":[
+              	{
+              		"floorNo":"1",
+              		"unit":"1",
+              		"roomNo":"1075",
+              		"door":""
+              	}
+              		,
+              	{
+              		"floorNo":"1",
+              		"unit":"1",
+              		"roomNo":"1075",
+              		"door":"A"
+              	}
+              		
+              ]
+            }
+            ,
+            {
+              "id":"402882465b1f3f3c015b1f3fa0820001",
+              "districtNo":"RQ2017033000003",
+              "districtName":"盈家生活小区1",
+              "houseStreet":{
+              	"provinceId":"<script>var p = provinceObj.get(9);document.write(p.name || "");</script>",
+              	"cityId":"<script>var p = cityObj.get(3);document.write(p.name || "");</script>",
+              	"dist":"<script>var p = districtObj.get(49);document.write(p.name || "");</script>",,
+              	"street":"中山北路89号"
+              },
+              "houses":[
+              ]
+            }
+            ,
+            {
+              "id":"402882465b1f0264015b1f087db20001",
+              "districtNo":"RQ2017033000001",
+              "districtName":"盈家生活小区",
+              "houseStreet":{
+              	"provinceId":"<script>var p = provinceObj.get(9);document.write(p.name || "");</script>",
+              	"cityId":"<script>var p = cityObj.get(3);document.write(p.name || "");</script>",
+              	"dist":"<script>var p = districtObj.get(49);document.write(p.name || "");</script>",,
+              	"street":"中山北路88号"
+              },
+              "houses":[
+              	{
+              		"floorNo":"1",
+              		"unit":"1",
+              		"roomNo":"401",
+              		"door":""
+              	}
+              		,
+              	{
+              		"floorNo":"1",
+              		"unit":"1",
+              		"roomNo":"401",
+              		"door":""
+              	}
+              		,
+              	{
+              		"floorNo":"1",
+              		"unit":"2",
+              		"roomNo":"401",
+              		"door":"A"
+              	}
+              		
+              ]
+            }
+            
+        ],
+      "page":{
+      	"pageNum":"1",
+      	"numPerPage":"50",
+      	"recordCount":"4"
+      },
+      "search":{
+      	"type":"",
+      	"provinceId":"9",
+      	"cityId":"",
+      	"dist":"",
+      	"street":"",
+      	"type":"",
+      	"districtName":""
+      }
+    }
+}
+.config(['$httpProvider', function($httpProvider) {
+	$httpProvider.defaults.headers.post = {'Content-Type' : 'application/x-www-form-urlencoded'};
+}])
+jQuery.param(参数)

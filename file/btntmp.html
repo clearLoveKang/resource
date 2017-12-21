@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+		<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+		<script src="js/jquery.min.js"></script>
+    	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<a class="btn btn-danger" id="demo" ng-click="Btn(1)">{{name}}</a>
+		
+		<script>
+		var app = angular.module('myApp',[])
+		.controller('myCtrl',function($scope){
+			$scope.name = "你好老表";
+//			var btntmp = function (opt) {
+//				console.info(opt)
+//	        var wrap = document.createElement('div'), abtn = document.createElement('a');
+//	        wrap.appendChild(abtn);
+//	        $(abtn).attr('href', 'javascript:;').addClass('btn');
+//	        if (opt.isDisabled) {
+//	            $(abtn).addClass('disabled');
+//	        }
+//	        $(abtn).text(opt.buttonText);
+//	        if (opt.functionName) {
+//	            var ngClick = opt.functionName + '($event, "'+opt.paramId+'")';
+//	            $(abtn).attr('ng-click', ngClick);
+//	        }
+//	        return $(wrap).html();
+//	    }
+			
+			$scope.Btn = function (opt) {
+				alert(opt)
+            if (opt == 1) {                           // 装修状态判断
+//                return btntmp({
+//                  isDisabled: false,
+//                  paramId: opt,
+//                  functionName: "Btn",
+//                  buttonText: "老子不好"
+//              });
+				$scope.name = '老子不好';
+            }
+        }
+			
+			
+			
+	})		
+		</script>
+	</body>
+</html>

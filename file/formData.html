@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<form id= "uploadForm">  
+		      <p >指定文件名： <input type="text" name="filename" value= ""/></p >  
+		      <p >上传文件： <input type="file" name="file"/></ p>  
+		      <input type="button" value="上传" onclick="doUpload()" />  
+		</form>  
+	</body>
+	<script>
+		function doUpload() {  
+		     var formData = new FormData($( "#uploadForm" )[0]);  
+		     $.ajax({  
+		          url: 'http://192.168.1.71:8080/hardware-service/api/excel/houseUploadByUnit.json' ,  
+		          type: 'POST',  
+		          data: formData,  
+		          async: false,  
+		          cache: false,  
+		          contentType: false,  
+		          processData: false,  
+		          success: function (returndata) {  
+		              console.log(returndata);  
+		          },  
+		          error: function (returndata) {  
+		              console.log(returndata);  
+		          }  
+		     });  
+		}  
+	</script>
+	<script>
+		<div class="accordion" fillSpace="sideBar">
+          <#list menuList as vo>
+            <#if vo.level??&&(vo.level=0)>
+              <div class="accordionHeader">
+                <h2><span class="${vo.menuIconCss}">Folder</span>${vo.menuName }</h2>
+              </div>
+              <div class="accordionContent">
+                <ul class="tree treeFolder">
+                  <#list menuList as svo>
+                    <#if svo.upId??&&(vo.id=svo.upId)>
+                      <li>
+                        <a href="${common.getResolveNavTabIdUrl(basePath,svo.menuPath,svo.tagName,svo.menuType)}" target="navTab" rel="${svo.tagName}">${svo.menuName}</a>
+                      </li>
+                    </#if>
+                  </#list>
+                </ul>
+              </div>
+            </#if>
+          </#list>
+        </div>
+	</script>
+</html>

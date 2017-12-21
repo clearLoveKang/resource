@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myCtrl">
+		<!--ng-repeat 有局限性，选择的值是一个字符串:-->
+		<select ng-init="checkName = sites[0].url" ng-model="checkName">
+			<option ng-repeat="k in sites" value="{{k.url}}">{{k.site}}</option>
+		</select>
+		<div>您选择的是：{{checkName}}</div>
+		<!--option选中的值是一个对象-->
+		<select ng-init="oDemo=sites[0]" ng-model="oDemo" ng-options="x.site for x in sites"></select>
+		<h3>您选择的网站是：{{oDemo.site}}</h3>
+		<h4>您选择的网址是：{{oDemo.url}}</h4>
+		<h5>{{oDemo}}</h5>
+		<select ng-init="oDemo_1=list.list01" ng-model="oDemo_1" ng-options="x for (x,y) in list"></select>
+		<h1>你选择的朋友是: {{oDemo_1}}</h1>
+		<hr />
+		<select ng-init="selectedCar = oList.car02" ng-model="selectedCar" ng-options="y.color for (x, y) in oList"></select>
+		<h1>你选择的款式: {{selectedCar.brand}}</h1>
+		<h1>你选择的型号: {{selectedCar.model}}</h1>
+		<h1>你选择的颜色: {{selectedCar.color}}</h1>
+	</div>
+
+
+<script>
+//数组类型创建option   label for value in array
+var app = angular.module('myApp', []);
+	app.controller('myCtrl',function($scope){
+		 $scope.sites = [
+						    {site : "Google", url : "http://www.google.com"},
+						    {site : "Runoob", url : "http://www.runoob.com"},
+						    {site : "Taobao", url : "http://www.taobao.com"}
+						];
+		$scope.list = {
+			list01:"郭涵宇",
+			list02:'胡文科',
+			list03:'王梦圆'
+		}
+		$scope.oList = {
+			car01 : {brand : "Ford", model : "Mustang", color : "red"},
+	        car02 : {brand : "Fiat", model : "500", color : "white"},
+	        car03 : {brand : "Volvo", model : "XC90", color : "black"}
+		}
+		
+		
+	})
+
+</script>
+
+</body>
+</html>

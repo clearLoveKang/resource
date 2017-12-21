@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<title>分页器</title>
+		<link href="pager.css" rel="stylesheet" />
+		<script src="jquery.min.js"></script>
+	</head>
+
+	<body>
+		<div id="pager"></div>
+		<script src="pager.js"></script>
+		<script>
+			function doChangePage(obj) {
+				console.info(obj.index)
+			}
+
+			var pagerBox = document.getElementById('pager');
+
+			var pager = new Pager({
+				index: 1,
+				total: 33,
+				parent: pagerBox,
+				onchange: doChangePage
+			});
+		</script>
+	</body>
+
+</html>

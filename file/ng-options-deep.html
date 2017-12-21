@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js?v1"></script>
+</head>
+<body ng-app="myApp">
+	 <div ng-controller="myCtrl">
+	      <select ng-model = "myOption" ng-options = "opt.value as opt.label group by opt.group for opt in myOptions">
+	          <option value="">-- 请选择 --</option>
+	      </select>
+	      <p>{{myOption}}</p>
+	  </div>
+
+
+<script>
+//数组类型创建option   label for value in array
+var selectApp = angular.module('myApp',[]);
+	selectApp.controller('myCtrl',function($scope){
+	    $scope.myOption = "--请选择--"
+	    $scope.myOptions = [{
+	        "value": 106,
+	        "group": "分组1",
+	        "label": "选项1"
+	    },{
+	        "value": 107,
+	        "group": "分组1",
+	        "label": "选项2"
+	    },{
+	        "value": 108,
+	        "group": "分组2",
+	        "label": "选项3"
+	    },{
+	        "value": 109,
+	        "group": "分组2",
+	        "label": "选项4"
+	    },{
+	        "value": 110,
+	        "group": "分组2",
+	        "label": "选项5"
+	    }];
+	})
+</script>
+
+</body>
+</html>

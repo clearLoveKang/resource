@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js?v1"></script>
+</head>
+<body>
+	<div ng-app="myApp" ng-controller="myCtrl">
+		<!--ng-options创建options-->
+		<select  ng-init="friengName = names[1]" ng-click="proFunc_1()" ng-model="friengName" ng-options="x for x in names"></select>
+		<!--ng-repeat创建options-->
+		<select ng-init="sb = names_1[0]" ng-model="sb"  ng-change="myFunc(sb)">
+			<option value="">省份 </option>
+			<option value="{{k}}" ng-repeat="k in names_1">{{k}}</option>
+		</select>
+		<input type="" name="" id="" value="" />
+		
+		<ul>
+			<li ng-class="{true:'you',false:''}[1 <= index]">sdf</li>
+			<li ng-class="{true:'you',false:''}[2 <= index]">sdf</li>
+			<li ng-class="{true:'you',false:''}[3 <= index]">sdf</li>
+			<li ng-class="{true:'you',false:''}[4 <= index]">sdf</li>
+			<li ng-class="{true:'you',false:''}[5 <= index]">sf</li>
+		</ul>
+		<textarea ng-model='shabi' name="" rows="" cols=""></textarea>
+		<p>{{shabi}}</p>
+	</div>
+
+
+<script>
+//数组类型创建option   label for value in array
+var app = angular.module('myApp', []);
+	app.controller('myCtrl',function($scope){
+		$scope.index = 4;
+		$scope.names = ['蛋蛋','张宇','三哥','小刚']
+//		$scope.changervar = function(){
+//			console.info($scope.friengName)
+//		}
+		 $scope.myFunc = function(e) {
+        console.info(e)
+      };
+      
+      $scope.proFunc_1 = function(){
+             $scope.names_1 = $scope.names;
+				}
+	})
+
+</script>
+
+</body>
+</html>

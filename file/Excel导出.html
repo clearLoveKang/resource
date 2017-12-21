@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+		<script src="../work/libs/jquery-1.11.3.min.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<button class="btn btn-link" ng-click="exportToExcel('#demo')">
+		    <span class="glyphicon glyphicon-share"></span> 导出运单
+		</button>
+		<table id="demo">
+				 	<thead>
+				        <td>小区/编号</td>
+				        <td>小区/公寓</td>
+				        <td>街道/门牌号</td>
+				        <td>房源数量</td>
+				        <td>操作</td>
+			        </thead>
+			        <tbody>
+			        	<tr>
+					        <td>110</td>
+					        <td>米舍</td>
+				        	<td>250</td>
+					        <td>100</td>
+					        <td>吹逼</td>
+					    </tr>
+			        </tbody>
+		<script>
+			var app = angular.module('myApp',[]);
+			
+			app.factory('Excel',function($window){
+			    var uri='data:application/vnd.ms-excel;base64,',
+			        template='<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>',
+			        base64=function(s){return $window.btoa(unescape(encodeURIComponent(s)));},
+			        format=function(s,c){return s.replace(/{(\w+)}/g,function(m,p){return c[p];})};
+			    return {
+			        tableToExcel:function(tableId,worksheetName){
+			            var table=$(tableId),
+			                ctx={worksheet:worksheetName,table:table.html()},
+			                href=uri+base64(format(template,ctx));
+			            return href;
+			        }
+			    };
+			})
+			
+			app.controller('myCtrl',function(Excel,$scope,$timeout){
+				//导出excel
+				$scope.exportToExcel=function(tableId){ // ex: '#my-table'
+				    $scope.exportHref=Excel.tableToExcel(tableId,'sheet name');
+				    $timeout(function(){location.href=$scope.exportHref;},100); // trigger download
+				
+				}
+				
+			})
+		</script>
+	</body>
+</html>

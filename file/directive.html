@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="">
+			<li-directive></li-directive>
+			<div guo-directive></div>
+			<div class="zhang-directive"></div>
+			<!-- directive: runoob-directive -->
+		</div>
+	</body>
+		<script type="text/javascript">
+			var app = angular.module('myApp',[]);
+			app.directive('runoobDirective',function(){
+				return {
+					restrict:'M',
+					replace : true,
+					template:"<h1>自定义注释指令!左右必须留空格</h1>"
+				}
+			})
+			app.directive('guoDirective',function(){
+				return {
+					restrict:'A',
+					template:"<h1>自定义属性名指令!</h1>"
+				}
+			})
+			app.directive('zhangDirective',function(){
+				return {
+					restrict:'C',
+					template:"<h1>自定义类名指令!</h1>"
+				}
+			})
+			app.directive('liDirective',function(){
+				return {
+					restrict:'E',
+					template:"<h1>自定义元素名指令!</h1>"
+				}
+			})
+			
+			
+		</script>
+</html>

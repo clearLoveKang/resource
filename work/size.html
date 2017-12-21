@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>盈家</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<style type="text/css">
+.container {background: #f0f0f0; height: 100%; width: 100%; position: absolute;}
+</style>
+</head>
+<body>
+<div class="container">
+	<h1>窗口高宽</h1>
+	<p class="log"></p>
+</div>
+</body>
+
+<script type="text/javascript" src="libs/jquery-1.11.3.min.js"></script>
+<script>
+$(function () {
+	var $con = $('.container');
+	var logs = 'width: ' + $con.width() + 'px, height: ' + $con.height() + 'px';
+	$('.log').text(logs);
+});
+</script>
+</html>

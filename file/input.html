@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body>
+		<input type="file" name="" id="" value="" />
+		<button id="demo">点击改变input状态</button>
+		<input type="radio" name="radio" id="" value="2" />
+		<input type="radio" name="radio" id="" value="2" />
+		<input type="radio" name="radio" id="" value="2" />
+	</body>
+	<script type="text/javascript">
+		$('#demo').click(function(){
+			$('input').attr('disabled',"disabled")
+			alert(123)
+			//$('input').removeAttr("disabled");
+		})
+	</script>
+</html>

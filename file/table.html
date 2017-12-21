@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+		<title>表格</title>
+		<style>
+			table, th , td  {
+			  border: 1px solid grey;
+			  border-collapse: collapse;
+			  padding: 5px;
+			  text-align: center;
+			}
+			table tr:nth-child(odd)	{
+			  background-color: pink;
+			}
+			table tr:nth-child(even) {
+			  background-color: #ffffff;
+			}
+		</style>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<table>
+				<tr><th>列表信息</th></tr>
+				<tr ng-repeat="x in list | orderBy:'Country'">
+					<td>{{ $index + 1 }}</td>
+					<td>{{x.Name}}</td>
+					<td>{{x.Country | uppercase}}</td>
+					<td>{{x.City}}</td>
+				</tr>
+			</table>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var app = angular.module('myApp',[]);
+		app.controller('myCtrl',function($scope,$http){
+			$http.get('js/table.json').then(function(response){
+				console.log(response)
+				$scope.list = response.data.records;
+				
+			})
+		})
+	</script>
+</html>

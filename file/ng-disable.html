@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="" ng-init="mySwitch=false">
+	<p><button ng-disabled = "mySwitch"></button></p>
+	<input type="checkbox" ng-model="mySwitch" />
+	<h1>{{mySwitch}}</h1>
+	<p ng-show = "true">我是显示的元素</p>
+	<p ng-show = "false">我是隐藏的元素</p>
+	
+</div> 
+
+</body>
+</html>

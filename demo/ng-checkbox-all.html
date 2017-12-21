@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>全选</title>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<section ng-app="myApp" ng-controller="myCtrl">
+
+			<pre>{{choseArr}}</pre> 全选: <input type="checkbox" ng-model="master" ng-click="all(master,tesarry)">
+		
+			<div ng-repeat="z in tesarry">
+		
+				<input id={{z}} type="checkbox" ng-model="isSelect" ng-checked="master" ng-click="chk(z,isSelect)">{{z}}
+		
+			</div>
+		</section>
+		<script>
+		angular.module('myApp',[])
+		.controller('myCtrl',function($scope){
+	
+			$scope.tesarry=["1","2","3","4","5"];// 初始化数据
+			$scope.choseArr = []; // 定义数组用于存放前端显示
+		
+			var str = ""; //
+		
+			var flag = ""; // 是否点击了全选，是为a
+		
+			$scope.master = false; // 默认未选中
+		
+			$scope.all = function(c, v) { // 全选
+				if(c == true) {
+					$scope.isSelect = true;
+					$scope.choseArr = v;
+				} else {
+					$scope.isSelect = false;
+					$scope.choseArr = [];
+				}
+				flag = "a";
+				console.info($scope.choseArr)
+			};
+			$scope.chk = function(z, x) { //单选或者多选
+				if(flag == "a") { //在全选的基础上操作
+					str = $scope.choseArr.join(",") + ",";
+				}
+				if(x == true) { //选中
+					str = str + z + ",";
+					
+				} else {
+					str = str.replace(z + ",", ""); //取消选中
+				}
+				$scope.choseArr = (str.substr(0, str.length - 1)).split(",");
+				console.info($scope.choseArr)
+			};
+		
+			
+			
+		})
+		</script>
+	</body>
+</html>

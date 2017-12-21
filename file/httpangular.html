@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+		<script src="js/jquery.min.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<script type="text/javascript">
+			
+		var app = angular.module('myApp',[])
+//		.config(['$httpProvider', function($httpProvider) {
+//				$httpProvider.defaults.headers.post = {'Content-Type' : 'text/html'};
+//			}])
+			.controller('myCtrl',function($scope,$timeout,$http){
+				$http({
+				method: 'POST',
+				params:{"door":"a"},
+					url: 'http://192.168.2.198:8080/hardware-service/api/house/save.json'
+				}).then(function successCallback(response) {
+						console.log(d);
+					}, function errorCallback(response) {
+						// 请求失败执行代码
+				});
+								
+			})
+		</script>
+	</body>
+</html>

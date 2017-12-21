@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>angular常用API</title>
+		<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<input type="text" ng-model="uName" ng-init="uName = 'CHENG'"/>
+			<p>输入为：{{uName}}</p>
+			<p>转换字符串为小写：{{lowercase}}</p>
+			<p>转换字符串为大写：{{uppercase}}</p>
+			<p>判断给定对象是否为字符串：{{isString}}</p>
+			<p>判断给定对象是否为数字：{{isNumber}}</p>
+		</div>
+		
+		<script type="text/javascript">
+			var app = angular.module('myApp',[])
+			.controller('myCtrl',function($scope,$timeout){
+				$scope.uName = 'CHENG';
+				$scope.lowercase = angular.lowercase($scope.uName);
+				$scope.uppercase = angular.uppercase($scope.uName);
+				$scope.isString = angular.isString($scope.uName);
+				$scope.isNumber = angular.isNumber($scope.uName);
+				
+				$scope.$watch('uName',function(newValue,oldValue, scope){
+						$scope.uName = newValue;
+				        console.log(newValue);
+						
+				        console.log(oldValue);
+						
+				});
+								
+			})
+		</script>
+		
+		
+	</body>
+</html>

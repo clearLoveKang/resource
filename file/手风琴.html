@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+<script src="http://cdn.bootcss.com/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.js"></script> 
+<style>
+</style>
+
+
+</head>
+<body>
+
+
+<div ng-app="myApp" ng-controller="AccordionDemoCtrl" >
+<span style="white-space:pre">	</span>  <uib-accordion >
+    <uib-accordion-group heading="{{group.title}}" ng-repeat="group in groups">
+      {{group.content}}
+    </uib-accordion-group>
+
+
+<span style="white-space:pre">	</span> <uib-accordion-group heading="elset">
+      <p>Please, to delete your account, click the button below</p>
+    </uib-accordion-group>
+  </uib-accordion>
+</div>
+
+
+<script>
+var app = angular.module('myApp', ['ui.bootstrap']);
+app.controller('AccordionDemoCtrl', function ($scope) {
+
+
+  $scope.groups = [
+    {
+      title: 'Dynamic Group Header - 1',
+      content: 'Dynamic Group Body - 1'
+    },
+    {
+      title: 'Dynamic Group Header - 2',
+      content: 'Dynamic Group Body - 2'
+    }
+  ];
+
+});
+
+</script>
+</body>
+</html>

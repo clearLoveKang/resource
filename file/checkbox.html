@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<div ng-repeat="x in color ">
+				<input type="checkbox"  ng-click="myFunc($event,x.id)" />{{x.color}}
+			</div>
+			<div>
+				已选择:{{build}}
+			</div>
+		</div>
+		
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				
+				$scope.color = [
+					{id:'1',color:'红色'},
+					{id:'2',color:'黄色'},
+					{id:'3',color:'蓝色'},
+					{id:'4',color:'绿色'},
+					{id:'5',color:'青色'},
+					{id:'6',color:'蓝色'}
+				]
+				
+				$scope.build ='';
+				var oArray = [];
+				$scope.myFunc = function(e,id){
+					var evt = e.target.checked;
+					if (evt) {
+						oArray.push(id);
+						$scope.build = oArray;
+						console.info(evt,id,$scope.build)
+					}
+					
+				}
+				
+				
+			})
+			
+			
+		</script>
+	</body>
+</html>

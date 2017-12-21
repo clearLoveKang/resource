@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+</head>
+<body>
+
+<div ng-app="myApp" ng-controller="serviceCtrl"> 
+
+{{myService}}<br />
+{{myFactory}}<br />
+{{myProvider}}
+
+</div>
+
+<script>
+var app = angular.module('myApp', []);
+
+	app.service('myService',function(){//不可以直接return一个字符串
+		
+			
+	        return function(id){
+	        	alert(id)
+	        }
+	 
+	});
+	app.factory('myFactory',function(){//可以直接return一个字符串
+		
+		return '你好我是myFactory';
+		
+	});
+	app.provider('myProvider',function(){
+		
+//		return '你好我是myProvider';
+		
+		this.title = '你好我是myProvider';
+		this.$get = function(){
+			return "你好我是myProvider110";
+		}
+		
+	})
+
+
+app.controller('serviceCtrl',function($scope,myFactory,myService,myProvider){
+	console.info(myService)
+	myService("你好老表");
+	console.info(myFactory)
+	console.info(myProvider.title)
+	$scope.myFactory = myFactory;
+//	$scope.myService = myService.myFunc("你好我是myService");
+	$scope.myProvider = myProvider;
+})
+</script>
+
+</body>
+</html>

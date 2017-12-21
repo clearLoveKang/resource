@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>	
+		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+		<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+		<script src="js/public_alert.js"></script>
+	
+	</head>
+	<body>
+		 <!-- system modal start -->
+	        <div id="ycf-alert" class="modal">
+	            <div class="modal-dialog modal-sm">
+	                <div class="modal-content">
+	                    <div class="modal-header">
+	                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+	                        <h5 class="modal-title"><i class="fa fa-exclamation-circle"></i> [Title]</h5>
+	                    </div>
+	                    <div class="modal-body small">
+	                        <p>[Message]</p>
+	                    </div>
+	                    <div class="modal-footer" >
+	                        <button type="button" class="btn btn-primary ok" data-dismiss="modal">[BtnOk]</button>
+	                        <button type="button" class="btn btn-default cancel" data-dismiss="modal">[BtnCancel]</button>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    <!-- system modal end -->
+		
+		<button type="button" class="btn btn-default" onclick="demo()">点击哦</button>
+		<button type="button" class="btn btn-primary" onclick="demo1()">点击哦</button>
+	</body>
+	<script>
+		// 四个选项都是可选参数
+//		Modal.alert(
+//		    {
+//		        msg: '内容',
+//		        title: '标题',
+//		        btnok: '确定',
+//		        btncl:'取消'
+//		    });
+		
+		// 如需增加回调函数，后面直接加 .on( function(e){} );
+		// 点击“确定” e: true
+		// 点击“取消” e: false
+//		Modal.confirm(
+//		    {
+//		        msg: "是否删除角色？"
+//		    })
+//		    .on( function (e) {
+//		        alert("返回结果：" + e);
+//		    });
+		function demo(){
+			Modal.alert(
+		    {
+		        msg: '内容',
+		        title: '标题',
+		        btnok: '确定',
+		        btncl:'取消'
+		    });
+			
+		}
+		function demo1(){
+			Modal.confirm(
+		    {
+		        msg: "是否删除角色？"
+		    })
+		    .on( function (e) {
+		        console.info("返回结果：" + e);
+		    });
+			
+		}
+		
+	</script>
+</html>

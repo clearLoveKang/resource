@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="js/jquery.min.js"></script>
+		<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=3mOpzQemQA95gDM2PVSft1lFtb1E3deG"></script>
+		<style type="text/css">
+			.tangram-suggestion i.route-icon{
+				background: none;
+				padding-left: 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			 <!-- 地址输入框 -->
+	        <div class="form-group">
+	            <label class="control-label">地址名：</label>
+	            <input class="form-control input-md" placeholder="请输入小区" id="suggestId"  name="address" ng-model="address"/>
+	             <label class="control-label">详细地址：</label>
+	            <input type="" name="area" id="fullAddress" ng-model="area" />
+	        </div>
+	        
+		</div>
+		<script>
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope,mapSev){
+				
+				//地址智能搜索补全
+			    $scope.ca = new BMap.Autocomplete({"input" : "suggestId"});//建立一个自动完成的对象fullAddress
+			    //$scope.ca1 = new BMap.Autocomplete({"input" : "fullAddress"});
+				
+			    $scope.ca.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
+			    	var areaname = e.item.value.business;
+					document.getElementById('suggestId').value = areaname;
+			        mapSev('上海','上海市','长宁区',areaname,'fullAddress');
+			          
+			    });
+				
+				
+				
+//		        var sb = new BMap.Autocomplete({"input" : "suggestId"});//建立一个自动完成的对象fullAddress
+//				sb.addEventListener("onconfirm", function(e) { //鼠标点击下拉列表后的事件
+//					document.getElementById('suggestId').value = e.item.value.business;
+//					mapSev('上海','上海市','长宁区','新泾家苑','fullAddress');
+//				});
+				
+			})
+		</script>
+		<script src="js/mapService.js"></script>
+	</body>
+</html>

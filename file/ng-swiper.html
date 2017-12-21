@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+		<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+		<script src="js/swiper.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			
+			<list-scroll></list-scroll>  
+			
+		</div>
+		
+		<script>
+			var app = angular.module('myApp',[])
+			app.directive('listScroll',function(){
+					  return {
+					    restrict:'E',
+					    template:'<div class="chooseDiv">'+
+					                '<div class="swiper-container">'+
+					                  '<div class="swiper-wrapper">'+
+					                    '<div class="swiper-slide"  ng-click="count($index)" ng-repeat="x in list" repeat-finish="renderFinish()">{{x}}</div>'+
+					                  '</div>'+
+					                '</div>'+
+					                '<div class="mark_div"></div>'+
+					              '</div>',
+					    link:function($scope,element,attrs){
+					      $scope.renderFinish = function(){
+					          var mySwiper1 = new Swiper('.swiper-container',{
+					           
+					        })
+					         
+					      }        
+					    }
+					  }
+				})
+				
+				.directive('repeatFinish',function(){
+				    return {
+				        link: function(scope,element,attr){
+				        	console.log(scope);
+				        	console.log(attr)
+				            if(scope.$last == true){
+				                console.log('ng-repeat执行完毕')
+				                scope.$eval( attr.repeatFinish )
+				            }
+				        }
+				    }
+				})
+			
+			app.controller('myCtrl', function($scope) {
+			  console.log($scope);
+			  $scope.list = ['please choose','湖北','湖南','浙江','江苏','广东','广西','深圳','福建'];
+			  $scope.count = function(e){
+			  	console.info(e)
+			  }
+			})
+			
+		</script>
+		
+		
+	</body>
+</html>

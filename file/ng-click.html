@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.bootcss.com/angular.js/1.6.3/angular.min.js"></script>
+	</head>
+	<body>
+		<div ng-app="myApp" ng-controller="myCtrl">
+			<button ng-click="count = count+1">请点击我！</button>
+			<p>{{count}}</p>
+			<button ng-click="toggle()">请点击我显示隐藏</button>
+			<p ng-hide="oSb">
+				姓：<input type="text" ng-model="oName" />
+				名：<input type="text" ng-model="ofirstName" />
+				姓名：<span>{{oName+""+ofirstName}}</span>
+			</p>
+		</div>
+		<script type="text/javascript">
+			var app = angular.module('myApp',[]);
+			app.controller('myCtrl',function($scope){
+				$scope.count = 0;
+				$scope.oName = "程";
+				$scope.ofirstName = "安康";
+				$scope.oSb = false;
+				$scope.toggle = function(){
+					$scope.oSb = !$scope.oSb;
+				}
+				
+				
+				
+			})
+		</script>
+	</body>
+</html>

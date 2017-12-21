@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		
+		<link rel="stylesheet" href="css/app.css" />
+		<link rel="stylesheet" href="angular-ui-select/select.min.css" />
+		<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+		
+		 <script src="js/jquery.min.js"></script>
+   		 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+		<script src="angular-ui-select/select.min.js"></script>
+	</head>
+	<body ng-app="myApp" ng-controller="myCtrl">
+		 <div class="form-group">
+	        <label class="col-sm-3 control-label text-left">Default</label>
+	        <div class="col-sm-6">
+	
+	          <ui-select ng-model="person.selected" theme="bootstrap">
+	            <ui-select-match placeholder="看看是啥">{{$select.selected.name}}</ui-select-match>
+	            <ui-select-choices ng-repeat="item in people">
+	              <div ng-bind-html="item.name "></div>
+	              <small ng-bind-html="item.email "></small>
+	            </ui-select-choices>
+	          </ui-select>
+	
+	        </div>
+	      </div>
+	      <script>
+	      	var app = angular.module('myApp',[])
+	      	.controller('myCtrl',function($scope){
+	      	 $scope.person = {};
+        $scope.people = [
+        { name: 'Adam',      email: 'adam@email.com',      age: 12, country: 'United States' },
+        { name: 'Amalie',    email: 'amalie@email.com',    age: 12, country: 'Argentina' },
+        { name: 'Estefanía', email: 'estefania@email.com', age: 21, country: 'Argentina' },
+        { name: 'Adrian',    email: 'adrian@email.com',    age: 21, country: 'Ecuador' },
+        { name: 'Wladimir',  email: 'wladimir@email.com',  age: 30, country: 'Ecuador' },
+        { name: 'Samantha',  email: 'samantha@email.com',  age: 30, country: 'United States' },
+        { name: 'Nicole',    email: 'nicole@email.com',    age: 43, country: 'Colombia' },
+        { name: 'Natasha',   email: 'natasha@email.com',   age: 54, country: 'Ecuador' },
+        { name: 'Michael',   email: 'michael@email.com',   age: 15, country: 'Colombia' },
+        { name: 'Nicolás',   email: 'nicolas@email.com',    age: 43, country: 'Colombia' }
+        ];
+          
+          
+          
+	      		
+	      	})
+	      	
+	      </script>
+	</body>
+</html>

@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+	<meta name="format-detection" content="telephone=no" />
+	<title>盈家租后</title>
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
+<link rel="stylesheet" href="css/swiper.min.css">
+<link rel="stylesheet" href="css/weui_layout.css">
+<link rel="stylesheet" href="css/topcoat-checkbox.css">
+<link rel="stylesheet" href="css/nouislider.css">
+<link rel="stylesheet" href="css/layout.css">
+
+<style>
+</style>
+
+</head>
+<body ontouchmove="javascript:function(e){e.preventDefault()}">
+    <div class="container" id="container"></div>
+	<div class="popup" id="popup"></div>
+
+	<!-- loading -->
+	<div id="loadingToast" class="weui_loading_toast" style="display:none;">
+	    <div class="weui_mask_transparent"></div>
+	    <div class="weui_toast">
+	        <div class="weui_loading">
+	            <div class="weui_loading_leaf weui_loading_leaf_0"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_1"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_2"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_3"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_4"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_5"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_6"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_7"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_8"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_9"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_10"></div>
+	            <div class="weui_loading_leaf weui_loading_leaf_11"></div>
+	        </div>
+	        <p class="weui_toast_content">数据提交中</p>
+	    </div>
+	</div>
+
+<script type="text/html" id="tpl_login">
+<div class="login-form">
+	<div class="row center project-name">
+		<img src="img/projectname@2x.png" class="img-half">
+	</div>
+	<div class="row">
+		<div class="form-group-lg col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+			<input type="text" class="form-control login-name border-right" value="" placeholder="请输入您的姓名">
+		</div>
+		<div class="form-group-lg col-xs-12 col-sm-offset-3 col-sm-6 col-md-offset-4 col-md-4">
+			<input type="number" class="form-control login-phone border-right" value="" placeholder="请输入您的手机">
+		</div>
+		<div class="form-group-lg row col-xs-12 center">
+			<button class="btn btn-lg btn-primary js-login">登录</button>
+		</div>
+	</div>
+</div>
+</script>
+
+
+<style>
+</style>
+
+<script type="text/html" id="tpl_home">
+
+<!-- 目前为租赁报价，需要增加房屋买卖的报价switch -->
+
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/login" class="go-login-btn"></a>
+	                </div>
+	                <h1>盈家租后</h1>
+	                <div class="pull-right">
+	                	<a href="" class="go-login-btn"></a>
+	                </div>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+<div class="row home-btns-wrap">
+	<div class="entries-a inner">
+		<a href="#/decorateagent" class="home-btns home-btn-1">
+			<img src="img/home-btn-a@2x.jpg">
+			<span class="title">装修报价助手</span>
+		</a>
+	</div>
+	<div class="entries-b inner">
+		<a href="#/offerlist" class="home-btns home-btn-1">
+			<img src="img/home-btn-b@2x.png">
+			<span class="title">报价记录</span>
+		</a>
+	</div>
+	<div class="entries-c inner">
+		<a href="#/caselist" class="home-btns home-btn-3">
+			<img src="img/home-btn-c@2x.png">
+			<span class="title">软装案例库</span>
+		</a>
+	</div>
+</div>
+</script>
+
+<script type="text/html" id="tpl_decorate_agent">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="javascript:void(0)" class="from-area-jumpto-home back innjiaBackButton"></a>
+	                </div>
+	                <h1>盈家装修助手</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="container page-container jsonform">
+
+		<div class="col-xs-12">
+			<h2 class="page-header"><span>基础信息</span></h2>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">总面积<span class="mini-text light-gray">（建筑面积）</span></label>
+				<div class="input-group req">
+					<input type="number" class="form-control req-ele" id="total_building_area">
+					<div class="input-group-addon">m²</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">得房率 <input type="number" class="span" id="room-rate" disabled="disabled" value="80"> <span class="mini-text light-gray">（请咨询业主或当地物业）</span></label>
+					<div class=slider-range id=rangeSlider></div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">房龄</label>
+				<div class="input-group req">
+					<input type="number" class="form-control req-ele" id="building_age">
+					<div class="input-group-addon">年</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">房东当前保底月租金</label>
+				<div class="input-group req">
+					<input type="number" id="min_rent" class="form-control req-ele">
+					<div class="input-group-addon">元</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">预期装修后月租金</label>
+				<div class="input-group req">
+					<input type="number" id="max_rent" class="form-control req-ele">
+					<div class="input-group-addon">元</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4 renttype">
+				<label class="control-label">房东支付方式</label>
+				<div class="form-inline">
+					<label class="control-label">押</label>
+					<select class="form-control req req-ele" id="renttype_detain">
+						<option></option>
+						<option>0</option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+					</select>
+					<label class="control-label">付</label>
+					<select class="form-control req req-ele" id="renttype_pay">
+						<option></option>
+						<option>0</option>
+						<option>1</option>
+						<option>2</option>
+						<option>3</option>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<h2 class="page-header"><span>房屋使用面积</span></h2>
+		</div>
+		<div class="row" id="rooms">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4" id="kitchen-1">
+				<label class="control-label required">厨房</label>
+				<div class="input-group req">
+					<input type="number"  class="form-control req-ele" id="area-kitchen-1">
+					<div class="input-group-addon">m²</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4" id="toilet-1">
+				<label class="control-label required">卫生间</label>
+				<div class="input-group req">
+					<input type="number" class="form-control req-ele" id="area-toilet-1">
+					<div class="input-group-addon">m²</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4" id="bedroom-1">
+				<label class="control-label required">卧室</label>
+				<div class="input-group req">
+					<input type="number" class="form-control req-ele" id="area-bedroom-1">
+					<div class="input-group-addon">m²</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4" id="livingroom-1">
+				<label class="control-label">客厅</label>
+				<div class="input-group">
+					<input type="number" class="form-control" id="area-livingroom-1">
+					<div class="input-group-addon">m²</div>
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4" id="add-room-wrap">
+				<label class="control-label">增加居室</label>
+					<select class="form-control" id="add-room">
+						<option>选择您需要增加的居室</option>
+						<option value="toilet">增加卫生间</option>
+						<option value="bedroom">增加卧室</option>
+						<option value="livingroom">增加客厅</option>
+					</select>
+			</div>
+
+		</div>
+
+
+		<div class="col-xs-12">
+			<h2 class="page-header"><span>租赁意向客群</span></h2>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="fashions" id="fashion_a">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">职场精英（西门子）</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="fashions" id="fashion_b">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">知识青年（格力）</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="fashions" id="fashion_c">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">温馨家庭（东芝）</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="fashions" id="fashion_d">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">草原清新绿</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="fashions" id="fashion_e">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">阳光温馨黄</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="fashions" id="fashion_f">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">职场简约灰</span> 
+					</label>
+			</div>
+		</div>
+
+
+		<div class="col-xs-12">
+			<h2 class="page-header"><span>授权确认</span></h2>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" class="req-ele" statustype="required" id="locker_and_meter">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">需要安装电子门锁和智能电表</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" class="req-ele" statustype="required" id="rent_and_service">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">委托租赁管理并接受服务</span> 
+					  <span class="mini-text light-gray right-bottom">委托管理可垫付装修资金</span>
+					</label>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<h2 class="page-header"><span>房屋信息</span></h2>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="price" id="has_occluder">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">周边有重大遮挡物</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="price" id="has_water_damage">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">房间为泡水房</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="price" id="hardloading_break_wall" value="1">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">包含拆除</span> 
+					</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="price" id="has_floor_plan">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">已有房型图</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="price" id="hardloading_partition_wall">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">需要打隔断</span> 
+					</label>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<h2 class="page-header"><span>房东是否有保留物品</span></h2>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="keep" id="keep_aircon">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">保留空调</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="keep" id="keep_washer">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">保留洗衣机</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" statustype="keep" id="keep_fridge">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">保留冰箱</span> 
+					</label>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<h2 class="page-header"><span>房屋属性</span></h2>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">地铁步行距离</label>
+				<select class="form-control req req-ele lease-floating" id="away_from_subway">
+					<option value="">步行至最近地铁出入口的时间</option>
+					<option value="1">15分钟以上</option>
+					<option value="2">10分钟以上</option>
+					<option value="3">5分钟以上</option>
+				</select>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">所处地段</label>
+				<select class="form-control req req-ele lease-floating" id="building_region">
+					<option value="">小区所处地段</option>
+					<option value="1">外环以外</option>
+					<option value="2">中环-外环以内</option>
+					<option value="3">内环-中环以内</option>
+					<option value="4">内环以内</option>
+				</select>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">周边商圈</label>
+				<select class="form-control req req-ele lease-floating" id="trading_area">
+					<option value="">小区周边步行15分钟内有无商圈</option>
+					<option value="1">有</option>
+					<option value="2">无</option>
+				</select>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4 floor">
+				<label class="control-label">楼层</label>
+				<div class="form-inline req">
+					<input type="number" class="form-control req-ele border-right" value="" id="floor_at">
+					<span>/</span>
+					<input type="number" class="form-control req-ele border-right" value="" id="floor_total">
+				</div>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">房属</label>
+				<select class="form-control req req-ele" id="build_type">
+					<option value="">请选择房属</option>
+					<option value="1">公寓</option>
+					<option value="2">老公房</option>
+				</select>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+				<label class="control-label">租赁方式</label>
+				<select class="form-control req req-ele" id="renttype">
+					<option value="">请选择租赁方式</option>
+					<option value="1">合租</option>
+					<option value="2">整租</option>
+					<option value="3">整栋</option>
+				</select>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" class="" statustype="rules" id="take_photo">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">已按照规定拍摄照片</span> 
+					</label>
+			</div>
+			<div class="form-group form-group-lg col-xs-12 col-sm-6 col-md-4">
+					<label class="topcoat-checkbox req">
+					  <input aria-labelledby="checkbox3-label" aria-describedby="checkbox3-description" type="checkbox" class="" statustype="rules" id="shoot_video">
+					  <div class="topcoat-checkbox__checkmark"></div>
+					  <span class="control-label checkbox-text">已按照规定拍摄视频</span> 
+					</label>
+			</div>
+		</div>
+
+		<hr>
+		<div class="row">
+			<h3 class="center not-pass"><span class="red">您还有未填完的必填字段</span></h3>
+			<div class="center">
+				<a class="btn btn-lg btn-primary btn-agent-run">报价方案推荐</a>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="weui_dialog_confirm" id="dialog-agent-running" style="display: none;">
+	    <div class="weui_mask"></div>
+	    <div class="weui_dialog col-xs-10 col-sm-8 col-md-6">
+	        <div class="weui_dialog_hd"><strong class="weui_dialog_title">正在执行后台大数据智能匹配，请稍后...</strong></div>
+	        <div class="weui_dialog_bd">
+				<div class="weui_progress_bar">
+		            <div class="weui_progress_inner_bar agent-progress" style="width: 0%;"></div>
+		        </div>
+	        </div>
+	        <div class="weui_dialog_ft">
+	            <a href="javascript:;" class="weui_btn_dialog primary dialog-agent-close">处理中</a>
+	        </div>
+	    </div>
+	</div>
+
+
+</script>
+
+
+<script type="text/html" id="tpl_area">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="javascript:void(0)" class="from-area-jumpto-home back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="step-bar">
+		<a href="#/area" class="steps step-area active"><span>填写面积</span></a>
+		<a href="#/kitchen" class="steps step-kitchen"><span>厨卫</span></a>
+		<a href="#/bedroom" class="steps step-bedroom"><span>卧室</span></a>
+		<a href="#/livingroom" class="steps step-livingroom"><span>客厅</span></a>
+		<a href="#/softloading" class="steps step-softloading"><span>软装风格</span></a>
+		<a href="#/linen" class="steps step-linen"><span>布草</span></a>
+		<a href="#/offer" class="steps step-offer"><span>生成报价</span></a>
+	</div>
+
+	<!-- ㎡ -->
+	<div class="form-horizontal area-form">
+	    <div class="form-group form-group-lg area-input">
+	        <label for="" class="col-xs-2 control-label">厨房</label>
+	        <div class="col-xs-9">
+	        	<div class="input-group">
+		            <input type="number" class="form-control" bind="kitchen" id="area-kitchen" placeholder="厨房面积">
+		            <div class="input-group-addon">m²</div>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="form-group form-group-lg area-input">
+	        <label for="" class="col-xs-2 control-label">卫生间</label>
+	        <div class="col-xs-9">
+	        	<div class="input-group">
+		            <input type="number" class="form-control" bind="toilet" id="area-toilet" placeholder="卫生间面积">
+		            <div class="input-group-addon">m²</div> 
+	            </div>
+	        </div>
+	    </div>
+	    <div class="form-group form-group-lg area-input">
+	        <label for="" class="col-xs-2 control-label">卧室</label>
+	        <div class="col-xs-9">
+	        	<div class="input-group">
+		            <input type="number" class="form-control" bind="bedroom" id="area-bedroom" placeholder="卧室面积">
+		            <div class="input-group-addon">m²</div> 
+	            </div>
+	        </div>
+	    </div>
+	    <div class="form-group form-group-lg area-input">
+	        <label for="" class="col-xs-2 control-label">客厅</label>
+	        <div class="col-xs-9">
+	        	<div class="input-group">
+		            <input type="number" class="form-control" bind="livingroom" id="area-livingroom" placeholder="客厅面积">
+		            <div class="input-group-addon">m²</div> 
+	            </div>
+	        </div>
+	    </div>
+	    <div class="form-group area-next">
+	        <div class="col-xs-offset-2 col-xs-9 right">
+	            <a class="btn btn-lg btn-lg btn-primary from-area-jumpto-next" href="#/kitchen">下一步</a>
+	        </div>
+	    </div>
+	</div>
+</script>
+
+
+<script type="text/html" id="tpl_kitchen">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/area" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+
+	<div class="step-bar">
+		<a href="#/area" class="steps step-area finished"><span>填写面积</span></a>
+		<a href="#/kitchen" class="steps step-kitchen active"><span>厨卫</span></a>
+		<a href="#/bedroom" class="steps step-bedroom"><span>卧室</span></a>
+		<a href="#/livingroom" class="steps step-livingroom"><span>客厅</span></a>
+		<a href="#/softloading" class="steps step-softloading"><span>软装风格</span></a>
+		<a href="#/linen" class="steps step-linen"><span>布草</span></a>
+		<a href="#/offer" class="steps step-offer"><span>生成报价</span></a>
+	</div>
+
+    <div class="swiper-style-picker" bind="kitchen">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide style-model style-selectable" unitprice="300" plan="维修保洁">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-a"></div><div class="sp-title">修补</div><div class="sp-desc">仅对卫生间、厨房进行深度保洁及维修</div><div class="sp-price">300元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="800" plan="简装">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-b"></div><div class="sp-title">简装</div><div class="sp-desc">仅对卫生间、厨房进行深度保洁及维修</div><div class="sp-price">800元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="1600" plan="全装">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-c"></div><div class="sp-title">全装</div><div class="sp-desc">仅对卫生间、厨房进行深度保洁及维修</div><div class="sp-price">1600元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-disabled">
+            	<div class="sp-trig-d">
+            		敬请期待
+            	</div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+    <div class="row">
+	    <div class="form-group">
+	        <div class="col-xs-offset-2 col-xs-9 right">
+	            <a class="btn btn-lg btn-lg btn-primary" href="#/bedroom">下一步</a>
+	        </div>
+	    </div>
+    </div>
+</script>
+
+
+
+
+<script type="text/html" id="tpl_bedroom">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/kitchen" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="step-bar">
+		<a href="#/area" class="steps step-area finished"><span>填写面积</span></a>
+		<a href="#/kitchen" class="steps step-kitchen finished"><span>厨卫</span></a>
+		<a href="#/bedroom" class="steps step-bedroom active"><span>卧室</span></a>
+		<a href="#/livingroom" class="steps step-livingroom"><span>客厅</span></a>
+		<a href="#/softloading" class="steps step-softloading"><span>软装风格</span></a>
+		<a href="#/linen" class="steps step-linen"><span>布草</span></a>
+		<a href="#/offer" class="steps step-offer"><span>生成报价</span></a>
+	</div>
+
+    <div class="swiper-style-picker" bind="bedroom">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide style-model style-selectable" unitprice="200" softloading="200" plan="维修保洁">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-a"></div><div class="sp-title">修补</div><div class="sp-desc">仅对卧室进行深度保洁及维修</div><div class="sp-price">200元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="300" softloading="300" plan="简装">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-b"></div><div class="sp-title">简装</div><div class="sp-desc">仅对卧室进行深度保洁及维修</div><div class="sp-price">300元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="300" softloading="500" plan="全装">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-c"></div><div class="sp-title">全装</div><div class="sp-desc">仅对卧室进行深度保洁及维修</div><div class="sp-price">300元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-disabled">
+            	<div class="sp-trig-d">
+            		敬请期待
+            	</div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+    <div class="row">
+	    <div class="form-group">
+	        <div class="col-xs-offset-2 col-xs-9 right">
+	            <a class="btn btn-lg btn-primary" href="#/livingroom">下一步</a>
+	        </div>
+	    </div>
+    </div>
+</script>
+
+
+
+
+<script type="text/html" id="tpl_livingroom">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/bedroom" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="step-bar">
+		<a href="#/area" class="steps step-area finished"><span>填写面积</span></a>
+		<a href="#/kitchen" class="steps step-kitchen finished"><span>厨卫</span></a>
+		<a href="#/bedroom" class="steps step-bedroom finished"><span>卧室</span></a>
+		<a href="#/livingroom" class="steps step-livingroom active"><span>客厅</span></a>
+		<a href="#/softloading" class="steps step-softloading"><span>软装风格</span></a>
+		<a href="#/linen" class="steps step-linen"><span>布草</span></a>
+		<a href="#/offer" class="steps step-offer"><span>生成报价</span></a>
+	</div>
+
+    <div class="swiper-style-picker" bind="livingroom">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="维修保洁">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-a"></div><div class="sp-title">修补</div><div class="sp-desc">仅对客厅进行深度保洁及维修</div><div class="sp-price">200元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="简装">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-b"></div><div class="sp-title">简装</div><div class="sp-desc">仅对客厅进行深度保洁及维修</div><div class="sp-price">300元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="全装">
+            	<div class="sp-trig-b">
+            		<div class="sp-icon sp-icon-c"></div><div class="sp-title">全装</div><div class="sp-desc">仅对客厅进行深度保洁及维修</div><div class="sp-price">300元/m²</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-disabled">
+            	<div class="sp-trig-d">
+            		敬请期待
+            	</div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+    <div class="row">
+	    <div class="form-group">
+	        <div class="col-xs-offset-2 col-xs-9 right">
+	            <a class="btn btn-lg btn-primary" href="#/softloading">下一步</a>
+	        </div>
+	    </div>
+    </div>
+</script>
+
+
+
+
+<script type="text/html" id="tpl_softloading">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/livingroom" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="step-bar">
+		<a href="#/area" class="steps step-area finished"><span>填写面积</span></a>
+		<a href="#/kitchen" class="steps step-kitchen finished"><span>厨卫</span></a>
+		<a href="#/bedroom" class="steps step-bedroom finished"><span>卧室</span></a>
+		<a href="#/livingroom" class="steps step-livingroom finished"><span>客厅</span></a>
+		<a href="#/softloading" class="steps step-softloading active"><span>软装风格</span></a>
+		<a href="#/linen" class="steps step-linen"><span>布草</span></a>
+		<a href="#/offer" class="steps step-offer"><span>生成报价</span></a>
+	</div>
+
+    <div class="swiper-style-picker" bind="softloading">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="深沉">
+            	<div class="sp-trig-b">
+            		<div class="tg-popup tg-popup1">
+            			<img src="img/tg-softloading-style-a@2x.jpg" class="style-show">
+            			<div class="bar">
+            				<span class="title">深沉</span>
+            				<span class="desc">查看详情 &gt;</span>
+            			</div>
+            		</div>
+            		<div class="text">主材以深色为主，冷色调点缀，适合高端商务人士</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="青春">
+            	<div class="sp-trig-b">
+            		<div class="tg-popup tg-popup2">
+            			<img src="img/tg-softloading-style-b@2x.jpg" class="style-show">
+            			<div class="bar">
+            				<span class="title">青春</span>
+            				<span class="desc">查看详情 &gt;</span>
+            			</div>
+            		</div>
+            		<div class="text">主材以白色为主，暖色调点缀，适合年轻上班白领</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+        </div>
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide style-model style-selectable" plan="深沉"><div class="tg-popup tg-popup1">查看详情</div><span>选型1</span></div>
+            <div class="swiper-slide style-model style-selectable" plan="青春"><div class="tg-popup tg-popup2">查看详情</div><span>选型2</span></div>
+        </div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+    <div class="row">
+	    <div class="form-group">
+	        <div class="col-xs-offset-2 col-xs-9 right">
+	            <a class="btn btn-lg btn-primary" href="#/linen">下一步</a>
+	        </div>
+	    </div>
+    </div>
+
+
+    <div class="swiper-full-screen s-popup popup1">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9440.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9441.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9442.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9446.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9447.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9448.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9449.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9450.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9451.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9452.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9453.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9455.JPG"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+
+    <div class="swiper-full-screen s-popup popup2">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9449.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9450.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9451.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9452.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9453.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9455.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9440.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9441.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9442.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9446.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9447.JPG"></div>
+            <div class="swiper-slide"><img src="photos/shz01/B0L_9448.JPG"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+</script>
+
+
+
+
+<script type="text/html" id="tpl_linen">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/softloading" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="step-bar">
+		<a href="#/area" class="steps step-area finished"><span>填写面积</span></a>
+		<a href="#/kitchen" class="steps step-kitchen finished"><span>厨卫</span></a>
+		<a href="#/bedroom" class="steps step-bedroom finished"><span>卧室</span></a>
+		<a href="#/livingroom" class="steps step-livingroom finished"><span>客厅</span></a>
+		<a href="#/softloading" class="steps step-softloading finished"><span>软装风格</span></a>
+		<a href="#/linen" class="steps step-linen active"><span>布草</span></a>
+		<a href="#/offer" class="steps step-offer"><span>生成报价</span></a>
+	</div>
+
+    <div class="swiper-style-picker" bind="linen">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="A套布草风格">
+            	<div class="sp-trig-b">
+            		<div class="show-full">
+            			<img src="img/sp_linen-a@2x.png"><div class="text">A套布草风格</div>
+            		</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="B套布草风格">
+            	<div class="sp-trig-b">
+            		<div class="show-full">
+            			<img src="img/sp_linen-b@2x.png"><div class="text">B套布草风格</div>
+            		</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="C套布草风格">
+            	<div class="sp-trig-b">
+            		<div class="show-full">
+            			<img src="img/sp_linen-c@2x.png"><div class="text">C套布草风格</div>
+            		</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="D套布草风格">
+            	<div class="sp-trig-b">
+            		<div class="show-full">
+            			<img src="img/sp_linen-d@2x.png"><div class="text">D套布草风格</div>
+            		</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+            <div class="swiper-slide style-model style-selectable" unitprice="0" plan="E套布草风格">
+            	<div class="sp-trig-b">
+            		<div class="show-full">
+            			<img src="img/sp_linen-e@2x.jpg"><div class="text">E套布草风格</div>
+            		</div>
+	            	<div class="sp-trig-selected"></div>
+            	</div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+    <div class="row">
+	    <div class="form-group">
+	        <div class="col-xs-offset-2 col-xs-9 right">
+	            <a class="btn btn-lg btn-primary" href="#/offer">下一步</a>
+	        </div>
+	    </div>
+    </div>
+</script>
+
+
+
+<script type="text/html" id="tpl_offer">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/linen" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+	
+	<div class="step-bar">
+		<a href="#/area" class="steps step-area finished"><span>填写面积</span></a>
+		<a href="#/kitchen" class="steps step-kitchen finished"><span>厨卫</span></a>
+		<a href="#/bedroom" class="steps step-bedroom finished"><span>卧室</span></a>
+		<a href="#/livingroom" class="steps step-livingroom finished"><span>客厅</span></a>
+		<a href="#/softloading" class="steps step-softloading finished"><span>软装风格</span></a>
+		<a href="#/linen" class="steps step-linen finished"><span>布草</span></a>
+		<a href="#/offer" class="steps step-offer active"><span>生成报价</span></a>
+	</div>
+
+	<div class="offer-wrap col-xs-offset-2 col-xs-8">
+		<h2>报价详情</h2>
+		<div class="item hardloading">
+			<div class="subtotal">
+				<span class="title">硬装</span>
+				<span class="price"></span>
+				<hr>
+			</div>
+			<div class="subitems"></div>
+		</div>
+		<div class="item softloading">
+			<div class="subtotal">
+				<span class="title">软装</span>
+				<span class="price"></span>
+				<hr>
+			</div>
+			<div class="subdetail"></div>
+		</div>
+		<div class="item linen">
+			<div class="subtotal">
+				<span class="title">布草</span>
+				<span class="price"></span>
+				<hr>
+			</div>
+			<div class="subdetail"></div>
+		</div>
+		<div class="total">
+			<span class="price"></span>
+			<div class="title">总计：</div>
+		</div>
+	</div>
+    <div class="row">
+	    <div class="form-group">
+	        <div class="col-xs-offset-2 col-xs-8 right">
+	            <button class="btn btn-lg btn-primary js-offer-post">提交</button>
+	        </div>
+	    </div>
+    </div>
+    <div class="log"></div>
+	<div class="offer-mask col-xs-offset-2 col-xs-8">
+		<h2>请选择装修方案</h2>
+	</div>
+</script>
+
+
+
+
+<script type="text/html" id="tpl_offer_posted">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+
+	<h2 class="center">您的报价已提交</h2>
+	<div class="row center">
+		<a href="#/customer" class="btn btn-lg btn-primary">补充客户资料</a>
+	</div>
+</script>
+
+
+
+<script type="text/html" id="tpl_customer">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="javascript:history.back()" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+
+	<div class="form-horizontal area-form">
+	    <div class="form-group form-group-lg area-input">
+	        <label for="" class="col-xs-2 control-label">客户姓名</label>
+	        <div class="col-xs-9">
+	            <input type="text" class="form-control border-right" id="customer-name" placeholder="">
+	        </div>
+	    </div>
+	    <div class="form-group form-group-lg area-input">
+	        <label for="" class="col-xs-2 control-label">客户手机</label>
+	        <div class="col-xs-9">
+	            <input type="number" class="form-control border-right" id="customer-phone" placeholder="">
+	        </div>
+	    </div>
+	    <div class="form-group form-group-lg area-input">
+	        <label for="" class="col-xs-2 control-label">会谈记要</label>
+	        <div class="col-xs-9">
+	            <textarea class="form-control border-right" id="customer-memo" placeholder="" row="8"></textarea>
+	        </div>
+	    </div>
+	    <div class="form-group area-next">
+	        <div class="col-xs-offset-2 col-xs-9 right">
+	            <button class="btn btn-lg btn-lg btn-primary js-customer-post">保存</button>
+	        </div>
+	    </div>
+	</div>
+
+</script>
+
+
+
+<script type="text/html" id="tpl_caselist">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/home" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>实景案例库</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+<!-- 934 x 624, 240 x 180 -->
+	<dl class="caselist-wrap">
+		<dd class="">
+			<div class="caselist-btns aphoto1" ref="casedetail-1" style="background-image: url(photos/shcs01/1481258594_1_s.jpg)"></div>
+			<div class="caselist-desc">
+				<span class="title">梅川路340弄</span><!-- <span class="count">5</span> -->
+				<div class="caselist-before caselist-btns bphoto1" ref="casedetail-1-before" style="background-image: url(photos/shcb01/IMG_5447_s.jpg)"></div>
+			</div>
+		</dd>
+		<dd class="">
+			<div class="caselist-btns aphoto2" ref="casedetail-2" style="background-image: url(photos/shcs02/IMG_6494_s.jpg)"></div>
+			<div class="caselist-desc">
+				<span class="title">南大街26号504</span><!-- <span class="count">5</span> -->
+				<div class="caselist-before caselist-btns bphoto2" ref="casedetail-2-before" style="background-image: url(photos/shcb02/IMG_4966_s.jpg)"></div>
+			</div>
+		</dd>
+		<dd class="">
+			<div class="caselist-btns aphoto3" ref="casedetail-5" style="background-image: url(photos/shcs05/IMG_6719_s.jpg)"></div>
+			<div class="caselist-desc">
+				<span class="title">南大街30号403</span><!-- <span class="count">5</span> -->
+				<div class="caselist-before caselist-btns bphoto3" ref="casedetail-5-before" style="background-image: url(photos/shcb05/IMG_5565_s.jpg)"></div>
+			</div>
+		</dd>
+		<dd class="">
+			<div class="caselist-btns aphoto4" ref="casedetail-4" style="background-image: url(photos/shcs04/IMG_6462_s.jpg)"></div>
+			<div class="caselist-desc">
+				<span class="title">南大街30号403</span><!-- <span class="count">5</span> -->
+				<div class="caselist-before caselist-btns bphoto4" ref="casedetail-4-before" style="background-image: url(photos/shcb04/IMG_5432_s.jpg)"></div>
+			</div>
+		</dd>
+	</dl>
+
+
+
+    <div class="swiper-full-screen s-popup casedetail-1 casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcs01/1481258594_1.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258595_2.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258595_4.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258595_5.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258595_6.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258596_10.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258596_7.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258596_8.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/1481258596_9.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6231.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6232.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6233.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6277.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6278.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6680.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6681.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs01/IMG_6683.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+    <div class="swiper-full-screen s-popup casedetail-1-before casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5447.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5448.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5449.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5450.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5451.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5452.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5453.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5454.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5455.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5456.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5457.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb01/IMG_5458.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+
+
+    <div class="swiper-full-screen s-popup casedetail-2 casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6494.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6495.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6496.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6497.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6498.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6499.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6758.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6760.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs02/IMG_6761.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+    <div class="swiper-full-screen s-popup casedetail-2-before casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4966.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4967.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4969.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4971.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4972.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4973.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4974.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4975.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4976.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb02/IMG_4980.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+
+
+    <div class="swiper-full-screen s-popup casedetail-4 casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6462.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6463.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6464.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6465.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6466.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6693.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6694.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6695.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs04/IMG_6696.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+    <div class="swiper-full-screen s-popup casedetail-4-before casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcb04/IMG_5432.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb04/IMG_5433.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb04/IMG_5434.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb04/IMG_5435.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+
+    <div class="swiper-full-screen s-popup casedetail-5 casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6719.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6724.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6725.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6726.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6727.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6728.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6729.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6720.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6721.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6722.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6723.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcs05/IMG_6730.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+    <div class="swiper-full-screen s-popup casedetail-5-before casedetails">
+        <div class="swiper-wrapper">
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5565.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5566.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5567.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5652.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5653.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5654.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5655.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5656.jpg"></div>
+<div class="swiper-slide"><img src="photos/shcb05/IMG_5657.jpg"></div>
+        </div></div>
+        <!-- Add Pagination -->
+        <!-- <div class="swiper-pagination"></div> -->
+    </div>
+
+
+</script>
+
+
+
+
+<script type="text/html" id="tpl_casedetail">
+
+</script>
+
+
+
+
+
+<script type="text/html" id="tpl_pick_offer">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/home" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>装修报价工具</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+
+	<div class="container page-container">
+		<div class="offer-title  col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+			<h2>报价详情</h2>
+		</div>
+		<div class="offer-wrap  col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+			<div class="item hardloading">
+				<div class="subtotal">
+					<span class="title">硬装</span>
+					<span class="price"></span>
+					<hr>
+				</div>
+				<div class="subitems"></div>
+			</div>
+			<div class="item softloading">
+				<div class="subtotal">
+					<span class="title">软装</span>
+					<span class="price"></span>
+					<hr>
+				</div>
+				<div class="subdetail"></div>
+			</div>
+			<div class="item linen">
+				<div class="subtotal">
+					<span class="title">布草</span>
+					<span class="price"></span>
+					<hr>
+				</div>
+				<div class="subdetail"></div>
+			</div>
+			<div class="total">
+				<span class="price"></span>
+				<div class="title">总计：</div>
+			</div>
+		</div>
+
+		<div class="offer-wrap  col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-8 fashion-picker">
+			<div class="fashion" id="fashion_a_panel" name="职场精英（西门子）">
+				<div class="inner">
+					<p>职场精英（西门子）</p>
+					<img src="img/sp_fashion-a@2x.png">
+					<img src="img/sp-agree@2x.png" class="agree">
+				</div>
+			</div>
+			<div class="fashion" id="fashion_b_panel" name="知识青年（格力）">
+				<div class="inner">
+					<p>知识青年（格力）</p>
+					<img src="img/sp_fashion-b@2x.png">
+					<img src="img/sp-agree@2x.png" class="agree">
+				</div>
+			</div>
+			<div class="fashion" id="fashion_c_panel" name="温馨家庭（东芝）">
+				<div class="inner">
+					<p>温馨家庭（东芝）</p>
+					<img src="img/sp_fashion-c@2x.png">
+					<img src="img/sp-agree@2x.png" class="agree">
+				</div>
+			</div>
+			<div class="fashion" id="fashion_d_panel" name="草原清新绿">
+				<div class="inner">
+					<p>草原清新绿</p>
+					<img src="img/sp_fashion-d@2x.jpg">
+					<img src="img/sp-agree@2x.png" class="agree">
+				</div>
+			</div>
+			<div class="fashion" id="fashion_e_panel" name="阳光温馨黄">
+				<div class="inner">
+					<p>阳光温馨黄</p>
+					<img src="img/sp_fashion-e@2x.jpg">
+					<img src="img/sp-agree@2x.png" class="agree">
+				</div>
+			</div>
+			<div class="fashion" id="fashion_f_panel" name="职场简约灰">
+				<div class="inner">
+					<p>职场简约灰</p>
+					<img src="img/sp_fashion-f@2x.jpg">
+					<img src="img/sp-agree@2x.png" class="agree">
+				</div>
+			</div>
+		</div>
+
+	    <div class="row offer-commit-row">
+		    <div class="form-group">
+		        <div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-2 col-md-8">
+		            <button class="btn btn-lg btn-primary js-offer-post">提交</button>
+		        </div>
+		    </div>
+	    </div>
+	    <div class="log"></div>
+	</div>
+</script>
+<style>
+</style>
+
+
+
+
+
+<style>
+.swiper-slide {border-bottom: 1px solid #e0e0e0;}
+</style>
+<script type="text/html" id="tpl_offerlist">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/home" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>我的报价</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+
+	<div class="container page-container">
+		<table id="myoffer">
+			<thead>
+				<tr>
+					<td>提交日期</td>
+					<td>客户姓名</td>
+					<td>客户电话</td>
+					<td>报价方案</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class='createdAt'>2016.03.03</td>
+					<td class='salesman_name'>程安康</td>
+					<td class='salesman_phone'>13253521216</td>
+					<td class='plan'>你猜你猜你猜你猜你猜你猜你猜你猜猜你猜猜你猜</td>
+				</tr>
+				<tr>
+					<td>2016.03.03</td>
+					<td>程安康</td>
+					<td>13253521216</td>
+					<td>你猜你猜你猜你猜你猜你猜你猜你猜</td>
+				</tr>
+				<tr>
+					<td>2016.03.03</td>
+					<td>程安康</td>
+					<td>13253521216</td>
+					<td>你猜你猜你猜你猜你猜你猜你猜你猜</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</script>
+
+
+<script type="text/html" id="tpl_qrcode">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="#/home" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>我的报价</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+
+	<div class="container page-container">
+		<input type="text" class="form-control" id="href">
+		<div class="qrcode" id="qrcode">
+		</div>
+	</div>
+
+</script>
+
+
+<script type="text/html" id="tpl_plan_detail">
+	<section class="mod-header-container">
+	    <div class="inner">
+	        <div class="container-fluid">
+	            <header class="site-top">
+	                <div class="pull-left">
+	                	<a href="history.back()" class="back innjiaBackButton"></a>
+	                </div>
+	                <h1>报价细节</h1>
+	            </header>
+	        </div>
+	    </div>
+	</section>
+
+	<div class="container page-container">
+		<div class="list">
+		</div>
+		<br><br><br><br><br>
+	</div>
+
+</script>
+
+
+
+
+
+
+
+</body>
+
+<script type="text/javascript" src="libs/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="libs/nouislider.js"></script>
+<script type="text/javascript" src="libs/swiper.min.js"></script>
+<script type="text/javascript" src="libs/router.min.js"></script>
+<script type="text/javascript" src="libs/qrcode.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+
+<script>
+$(function () {
+});
+
+</script>
+</html>

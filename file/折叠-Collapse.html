@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="//apps.bdimg.com/libs/bootstrap/3.3.4/css/bootstrap.min.css">
+<script src="http://apps.bdimg.com/libs/angular.js/1.4.6/angular.min.js"></script> 
+<script src="http://cdn.bootcss.com/angular-ui-bootstrap/1.1.2/ui-bootstrap-tpls.js"></script> 
+<style>
+<span style="white-space:pre">	</span>.active{background:red}
+</style>
+</head>
+<body>
+<div ng-app="myApp">
+	<div ng-controller="CollapseDemoCtrl">
+		<span style="white-space:pre">	</span><button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
+		<span style="white-space:pre">	</span>
+		<hr>
+		<span style="white-space:pre">	</span>
+		<div uib-collapse="isCollapsed">
+			<span style="white-space:pre">		</span>
+			<div class="well well-lg">Some content</div>
+			<span style="white-space:pre">	</span></div>
+	</div>
+	<div ng-controller="CollapseDemoCtrl">
+		<span style="white-space:pre">	</span><button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
+		<span style="white-space:pre">	</span>
+		<hr>
+		<span style="white-space:pre">	</span>
+		<div uib-collapse="isCollapsed">
+			<span style="white-space:pre">		</span>
+			<div class="well well-lg">Some content</div>
+			<span style="white-space:pre">	</span></div>
+	</div>
+	<div ng-controller="CollapseDemoCtrl">
+		<span style="white-space:pre">	</span><button type="button" class="btn btn-default" ng-click="isCollapsed = !isCollapsed">Toggle collapse</button>
+		<span style="white-space:pre">	</span>
+		<hr>
+		<span style="white-space:pre">	</span>
+		<div uib-collapse="isCollapsed">
+			<span style="white-space:pre">		</span>
+			<div class="well well-lg">Some content</div>
+			<span style="white-space:pre">	</span></div>
+	</div>
+</div>
+<script>
+var app = angular.module('myApp', ['ui.bootstrap']);
+app.controller('CollapseDemoCtrl', function ($scope) {
+  $scope.isCollapsed = false;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<!--<script src="../js/jquery.min.js"></script>-->
+		<script src="zDialog.js"></script>
+	</head>
+	<body>
+		<button id="demo" onclick="open9('警告：您确认要XXOO吗？')">点击弹出alert</button>
+		<button id="demo1" onclick="open10()">点击弹出confirm</button>
+	</body>
+	<script>
+//		Dialog.alert = function (msg, func, w, h) {
+//		    var w = w || 300,
+//		        h = h || 110;
+//		    var diag = new Dialog({
+//		        Width: w,
+//		        Height: h
+//		    });
+//		    diag.ShowButtonRow = true;
+//		    diag.Title = "系统提示";
+//		    diag.CancelEvent = function () {
+//		        diag.close();
+//		        if (func) func();
+//		    };
+//		    diag.InnerHtml = '<table height="100%" border="0" align="center" cellpadding="10" cellspacing="0">\
+//				<tr><td align="right"><img id="Icon_' + this.ID + '" src="' + IMAGESPATH + 'icon_alert.gif" width="34" height="34" align="absmiddle"></td>\
+//					<td align="left" id="Message_' + this.ID + '" style="font-size:9pt">' + msg + '</td></tr>\
+//			</table>';
+//		    diag.show();
+//		    diag.okButton.parentNode.style.textAlign = "center";
+//		    diag.okButton.style.display = "none";
+//		    diag.cancelButton.value = "确 定";
+//		    diag.cancelButton.focus();
+//		};
+		function open9(msg, func, w, h){
+			var w = w || 300,
+		        h = h || 110;
+		    var diag = new Dialog({
+		        Width: w,
+		        Height: h
+		    });
+		    diag.ShowButtonRow = true;
+		    diag.Title = "替你妈比";
+		    diag.CancelEvent = function () {
+		        diag.close();
+		        if (func) func();
+		    };
+		    diag.InnerHtml = '<table height="100%" border="0" align="center" cellpadding="10" cellspacing="0">\
+				<tr><td align="right"><img id="Icon_' + this.ID + '" src="' + IMAGESPATH + 'icon_alert.gif" width="34" height="34" align="absmiddle"></td>\
+					<td align="left" id="Message_' + this.ID + '" style="font-size:9pt">' + msg + '</td></tr>\
+			</table>';
+		    diag.show();
+		    diag.okButton.parentNode.style.textAlign = "center";
+		    diag.okButton.style.display = "none";
+		    diag.cancelButton.value = "渣渣";
+		    diag.cancelButton.focus();
+		   }
+		function open10()
+		{
+			Dialog.confirm('警告：您确认要XXOO吗？',function(){Dialog.alert("yeah，周末到了，正是好时候")});
+		}
+		
+		
+	</script>
+</html>

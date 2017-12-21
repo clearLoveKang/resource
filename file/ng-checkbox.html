@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="https://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	</head>
+
+	<body ng-app="myApp">
+		<div ng-controller="myCtrl">
+			<div ng-repeat="color in colors">
+				<input type="checkbox" ng-click="updateSelection($event,color.id)" />{{color.name}}
+			</div>
+		</div>
+		<div>
+			{{build}}
+		</div>
+
+		<script>
+			var app = angular.module('myApp', []);
+			app.controller("myCtrl", function($scope) {
+				$scope.colors = [{
+					id: 1,
+					name: 'black'
+				}, {
+					id: 2,
+					name: 'red'
+				}, {
+					id: 3,
+					name: 'blue'
+				}, {
+					id: 4,
+					name: 'yellow'
+				}, {
+					id: 5,
+					name: 'green'
+				}, {
+					id: 6,
+					name: 'white'
+				}];
+
+				$scope.build = '你好老表';
+
+				$scope.updateSelection = function($event, id) {
+					console.info($event)
+					var checkbox = $event.target;
+					var checked = checkbox.checked;
+					// console.info(checked)
+					if(checked) {
+						$scope.selected=id;
+						console.info($scope.selected)
+					} else {
+						var idx = $scope.selected.indexOf(id);
+						$scope.selected.splice(idx, 1);
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>
